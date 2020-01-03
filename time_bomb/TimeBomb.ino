@@ -33,8 +33,8 @@ Adafruit_SH1106 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 #define LED_GREEN   3
 #define LED_RED     4
 
-#define WIRE_YELLOW 6
-#define WIRE_GREEN  7
+#define WIRE_ORANGE 6
+#define WIRE_BLUE   7
 
 /* Uncomment this block to use hardware SPI
 #define OLED_DC     6
@@ -161,8 +161,8 @@ void setup() {
   pinMode(SWITCH, INPUT);
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_RED, OUTPUT);
-  pinMode(WIRE_YELLOW, INPUT);
-  pinMode(WIRE_GREEN, INPUT);
+  pinMode(WIRE_ORANGE, INPUT);
+  pinMode(WIRE_BLUE, INPUT);
 
   // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
   display.begin(SH1106_SWITCHCAPVCC);
@@ -186,15 +186,15 @@ void setup() {
 void loop() {
   if (bombEnabled) {
     display.clearDisplay();
-    if (digitalRead(WIRE_GREEN) == LOW) {
-      // green wire is disconnected, great!
+    if (digitalRead(WIRE_BLUE) == LOW) {
+      // blue wire is disconnected, great!
       stopBomb();
       digitalWrite(LED_GREEN, HIGH);
       digitalWrite(LED_RED, LOW);
       return;
     }
-    if (digitalRead(WIRE_YELLOW) == LOW) {
-      // yellow wire is disconnected, bad idea ^^
+    if (digitalRead(WIRE_ORANGE) == LOW) {
+      // orange wire is disconnected, bad idea ^^
       timerStep = 20; // accelerate the timer's pace
     }
   
